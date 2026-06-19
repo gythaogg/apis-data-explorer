@@ -1,2 +1,79 @@
-{% block content %}
-{% endblock %}
+<!doctype html>
+<html lang="en" data-theme="{% block theme %}dark{% endblock %}">
+<head>
+    {% block head %}
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}APIS Data Explorer{% endblock %}</title>
+
+    <link href="{% static 'apis_data_explorer/pico.min.css' %}" rel="stylesheet">
+    <link href="{% static 'apis_data_explorer/app.css' %}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body class="layout-shell">
+    <header>
+        {% block header %}
+        <nav class="container-fluid">
+            <ul>
+                <li>
+                    <a href="{% url 'home' %}" class="contrast">
+                        <strong>APIS Data Explorer</strong>
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <button
+                        type="button"
+                        id="theme-toggle"
+                        class="secondary outline"
+                        aria-label="Toggle light and dark mode"
+                    >
+                        <span aria-hidden="true">🌙</span>
+                        <span class="theme-toggle-label">Theme</span>
+                    </button>
+                </li>
+                {% block header_actions %}{% endblock %}
+            </ul>
+        </nav>
+        {% endblock %}
+    </header>
+    {% block content %}{% endblock %}
+    <footer>
+        {% block footer %}
+        <div class="container footer-content">
+            <small>APIS Data Explorer Footer</small>
+        </div>
+        {% endblock %}
+    </footer>
+
+    <script>
+        (function () {
+            const html = document.documentElement;
+            const button = document.getElementById("theme-toggle");
+
+            if (!button) return;
+
+            function currentTheme() {
+                return html.getAttribute("data-theme") || "light";
+            }
+
+            function applyButtonLabel(theme) {
+                button.innerHTML =
+                    theme === "dark"
+                        ? '<span aria-hidden="true">☀️</span><span class="theme-toggle-label">Light</span>'
+                        : '<span aria-hidden="true">🌙</span><span class="theme-toggle-label">Dark</span>';
+            }
+
+            applyButtonLabel(currentTheme());
+
+            button.addEventListener("click", function () {
+                const nextTheme = currentTheme() === "dark" ? "light" : "dark";
+                html.setAttribute("data-theme", nextTheme);
+                applyButtonLabel(nextTheme);
+            });
+        })();
+    </script>
+</body>
+</html>
