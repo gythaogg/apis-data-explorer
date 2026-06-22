@@ -104,7 +104,7 @@ wheels = [
 
 [[package]]
 name = "apis-data-explorer"
-version = "0.0.1"
+version = "0.0.3"
 source = { editable = "." }
 dependencies = [
     { name = "apis-acdhch-default-settings" },
@@ -121,7 +121,7 @@ dev = [
 requires-dist = [
     { name = "apis-acdhch-default-settings", specifier = "==2.20.0" },
     { name = "apis-core-rdf", specifier = "==0.64.5" },
-    { name = "apis-data-projection", specifier = "==0.1.1" },
+    { name = "apis-data-projection", specifier = ">=0.1.1" },
     { name = "faker", marker = "extra == 'dev'", specifier = ">=40.23.0" },
 ]
 provides-extras = ["dev"]
