@@ -104,12 +104,16 @@ wheels = [
 
 [[package]]
 name = "apis-data-explorer"
-version = "0.1.0"
-source = { virtual = "." }
+version = "0.0.1"
+source = { editable = "." }
 dependencies = [
     { name = "apis-acdhch-default-settings" },
     { name = "apis-core-rdf" },
     { name = "apis-data-projection" },
+]
+
+[package.optional-dependencies]
+dev = [
     { name = "faker" },
 ]
 
@@ -117,21 +121,22 @@ dependencies = [
 requires-dist = [
     { name = "apis-acdhch-default-settings", specifier = "==2.20.0" },
     { name = "apis-core-rdf", specifier = "==0.64.5" },
-    { name = "apis-data-projection", specifier = "==0.1.0" },
-    { name = "faker", specifier = ">=40.23.0" },
+    { name = "apis-data-projection", specifier = "==0.1.1" },
+    { name = "faker", marker = "extra == 'dev'", specifier = ">=40.23.0" },
 ]
+provides-extras = ["dev"]
 
 [[package]]
 name = "apis-data-projection"
-version = "0.1.0"
+version = "0.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "apis-acdhch-default-settings" },
     { name = "apis-core-rdf" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/cf/ce/3a0fea0105c9ebf244452b26f8a32c16097cce76a96f9334d166e12a2732/apis_data_projection-0.1.0.tar.gz", hash = "sha256:34b56eb7559af955b7e6e99c44d718b31ef5d264b54ccafd3bb191060e72a7d6", size = 55042, upload-time = "2026-06-19T15:45:35.383Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0a/2d/684f51c53370e0c2883fe7c646d54d28fa450ca7d6deacd377377153ca65/apis_data_projection-0.1.1.tar.gz", hash = "sha256:051361acdd0320e0e2b9987ad8a55d00c654c5ff5ef5c040c452e21942ed30ef", size = 55154, upload-time = "2026-06-22T12:20:27.28Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d0/7b/f58d01a7ee05cb139b364ea6dc347dde7d2893a422c828c4d4d89fa7ecd6/apis_data_projection-0.1.0-py3-none-any.whl", hash = "sha256:9b1b5b6812db5fbe2f64f5da8a703723cc44eb627432b5d79e152a902495bf83", size = 13886, upload-time = "2026-06-19T15:45:34.322Z" },
+    { url = "https://files.pythonhosted.org/packages/99/70/d04fcdca8c657c1313182d810e70b8d06c180404d52ad75fc2e77b97021c/apis_data_projection-0.1.1-py3-none-any.whl", hash = "sha256:de0ff0f1a3e6856e804b7e358a75a089b18273fb8d8899deee842ada3522499e", size = 13965, upload-time = "2026-06-22T12:20:25.978Z" },
 ]
 
 [[package]]

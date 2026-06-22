@@ -7,7 +7,11 @@ requires-python = ">=3.13"
 dependencies = [
     "apis-acdhch-default-settings==2.20.0",
     "apis-core-rdf==0.64.5",
-    "apis-data-projection==0.1.0",
+    "apis-data-projection==0.1.1",
+]
+
+[project.optional-dependencies]
+dev = [
     "faker>=40.23.0",
 ]
 
