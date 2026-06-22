@@ -104,7 +104,7 @@ wheels = [
 
 [[package]]
 name = "apis-data-explorer"
-version = "0.0.3"
+version = "0.0.4"
 source = { editable = "." }
 dependencies = [
     { name = "apis-acdhch-default-settings" },
@@ -121,22 +121,23 @@ dev = [
 requires-dist = [
     { name = "apis-acdhch-default-settings", specifier = "==2.20.0" },
     { name = "apis-core-rdf", specifier = "==0.64.5" },
-    { name = "apis-data-projection", specifier = ">=0.1.1" },
+    { name = "apis-data-projection", specifier = ">=0.1.2" },
     { name = "faker", marker = "extra == 'dev'", specifier = ">=40.23.0" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
 name = "apis-data-projection"
-version = "0.1.1"
+version = "0.1.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "apis-acdhch-default-settings" },
     { name = "apis-core-rdf" },
+    { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0a/2d/684f51c53370e0c2883fe7c646d54d28fa450ca7d6deacd377377153ca65/apis_data_projection-0.1.1.tar.gz", hash = "sha256:051361acdd0320e0e2b9987ad8a55d00c654c5ff5ef5c040c452e21942ed30ef", size = 55154, upload-time = "2026-06-22T12:20:27.28Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e4/3e/84877dcbc30ab007f6e2c88ec337bbc5ab2f85aa9997b4fa57b4cb7b13cf/apis_data_projection-0.1.2.tar.gz", hash = "sha256:ce3cc0208fd8172732611832a897c717f653a095800e1edc83e37332dad054e3", size = 56199, upload-time = "2026-06-22T13:27:00.361Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/99/70/d04fcdca8c657c1313182d810e70b8d06c180404d52ad75fc2e77b97021c/apis_data_projection-0.1.1-py3-none-any.whl", hash = "sha256:de0ff0f1a3e6856e804b7e358a75a089b18273fb8d8899deee842ada3522499e", size = 13965, upload-time = "2026-06-22T12:20:25.978Z" },
+    { url = "https://files.pythonhosted.org/packages/9d/46/af152ee68748324f344a81c000b2106f0be5ca325b5003be2ef60ce5ce67/apis_data_projection-0.1.2-py3-none-any.whl", hash = "sha256:34967d8813ca77bc4d53217aff5e56e73cd4bec433886ae652fad1365440f04b", size = 14349, upload-time = "2026-06-22T13:26:59.174Z" },
 ]
 
 [[package]]
@@ -221,6 +222,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/7a/1d/29d32e0fb40864b1f878c7f5a0b343ae676c6e2b271a2d55cc3a152391da/charset_normalizer-3.4.7-cp314-cp314t-win_amd64.whl", hash = "sha256:03853ed82eeebbce3c2abfdbc98c96dc205f32a79627688ac9a27370ea61a49c", size = 174168, upload-time = "2026-04-02T09:27:49.795Z" },
     { url = "https://files.pythonhosted.org/packages/de/32/d92444ad05c7a6e41fb2036749777c163baf7a0301a040cb672d6b2b1ae9/charset_normalizer-3.4.7-cp314-cp314t-win_arm64.whl", hash = "sha256:c35abb8bfff0185efac5878da64c45dafd2b37fb0383add1be155a763c1f083d", size = 153018, upload-time = "2026-04-02T09:27:51.116Z" },
     { url = "https://files.pythonhosted.org/packages/db/8f/61959034484a4a7c527811f4721e75d02d653a35afb0b6054474d8185d4c/charset_normalizer-3.4.7-py3-none-any.whl", hash = "sha256:3dce51d0f5e7951f8bb4900c257dad282f49190fdbebecd4ba99bcc41fef404d", size = 61958, upload-time = "2026-04-02T09:28:37.794Z" },
+]
+
+[[package]]
+name = "colorama"
+version = "0.4.6"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d8/53/6f443c9a4a8358a93a6792e2acffb9d9d5cb0a5cfd8802644b7b1c9a02e4/colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44", size = 27697, upload-time = "2022-10-25T02:36:22.414Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6", size = 25335, upload-time = "2022-10-25T02:36:20.889Z" },
 ]
 
 [[package]]
@@ -1143,6 +1153,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/11/00/416d2ba54d7d58a7f7c61bf62dfeb48fd553cf49614daf83312f2d2c156e/tablib-3.9.0.tar.gz", hash = "sha256:1b6abd8edb0f35601e04c6161d79660fdcde4abb4a54f66cc9f9054bd55d5fe2", size = 125565, upload-time = "2025-10-15T18:21:56.263Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/66/6b/32e51d847148b299088fc42d3d896845fd09c5247190133ea69dbe71ba51/tablib-3.9.0-py3-none-any.whl", hash = "sha256:eda17cd0d4dda614efc0e710227654c60ddbeb1ca92cdcfc5c3bd1fc5f5a6e4a", size = 49580, upload-time = "2025-10-15T18:21:44.185Z" },
+]
+
+[[package]]
+name = "tqdm"
+version = "4.68.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/87/d7/0535a28b1f5f24f6612fb3ff1e89fb1a8d160fee0f976e0aa6803862134b/tqdm-4.68.3.tar.gz", hash = "sha256:00dfa48452b6b6cfae3dd9885636c23d3422d1ec97c66d96818cbd5e0821d482", size = 170596, upload-time = "2026-06-17T07:36:52.105Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d8/8e/bb97bb0c71802080bfc8952937d174e49cfc50de5c951dd47b2496f0dcdb/tqdm-4.68.3-py3-none-any.whl", hash = "sha256:39832cc2def2789a6f29df83f172db7416cea70052c0907a57801c5f2fdccb03", size = 78337, upload-time = "2026-06-17T07:36:50.132Z" },
 ]
 
 [[package]]

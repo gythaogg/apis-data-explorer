@@ -1,13 +1,13 @@
 [project]
 name = "apis-data-explorer"
-version = "0.0.3"
+version = "0.0.4"
 description = "A generic, customisable data explorer for APIS instances"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "apis-acdhch-default-settings==2.20.0",
     "apis-core-rdf==0.64.5",
-    "apis-data-projection>=0.1.1",
+    "apis-data-projection>=0.1.2",
 ]
 
 [project.optional-dependencies]
