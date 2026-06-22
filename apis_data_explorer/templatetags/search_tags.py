@@ -14,4 +14,4 @@ def entity_types():
     )
     print(entity_types_list)
 
-    return ", ".join(entity_types_list)
+    return entity_types_list

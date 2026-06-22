@@ -1,8 +1,9 @@
 {% extends "apis_data_explorer/base.html" %}
-
+{% load search_tags %}
 {% block main_class %}{% endblock %}
 
 {% block content %}
+{% entity_types as entity_types %}
 <div class="explorer-layout">
     <aside class="facets">
         <form method="get" action="{% url 'search' %}">
@@ -33,7 +34,7 @@
                         type="search"
                         name="q"
                         value="{{ query }}"
-                        placeholder="Search {{ entity_type_placeholder }} …"
+                        placeholder="Search {{ entity_type_placeholder | join:", " }} …"
                         aria-label="Search data"
                     >
 
