@@ -104,7 +104,7 @@ wheels = [
 
 [[package]]
 name = "apis-data-explorer"
-version = "0.0.4"
+version = "0.0.5"
 source = { editable = "." }
 dependencies = [
     { name = "apis-acdhch-default-settings" },
@@ -121,23 +121,23 @@ dev = [
 requires-dist = [
     { name = "apis-acdhch-default-settings", specifier = "==2.20.0" },
     { name = "apis-core-rdf", specifier = "==0.64.5" },
-    { name = "apis-data-projection", specifier = ">=0.1.2" },
+    { name = "apis-data-projection", specifier = ">=0.1.3" },
     { name = "faker", marker = "extra == 'dev'", specifier = ">=40.23.0" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
 name = "apis-data-projection"
-version = "0.1.2"
+version = "0.1.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "apis-acdhch-default-settings" },
     { name = "apis-core-rdf" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e4/3e/84877dcbc30ab007f6e2c88ec337bbc5ab2f85aa9997b4fa57b4cb7b13cf/apis_data_projection-0.1.2.tar.gz", hash = "sha256:ce3cc0208fd8172732611832a897c717f653a095800e1edc83e37332dad054e3", size = 56199, upload-time = "2026-06-22T13:27:00.361Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5a/98/9da7129fb31669ce533bb79a025896bccc9cb13e33e8eefd35ed69a69c43/apis_data_projection-0.1.3.tar.gz", hash = "sha256:8d074033894be2c26004092c32641a03f396c54ccbb69512c3ca6ca6a33e1747", size = 56211, upload-time = "2026-06-22T14:58:27.051Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9d/46/af152ee68748324f344a81c000b2106f0be5ca325b5003be2ef60ce5ce67/apis_data_projection-0.1.2-py3-none-any.whl", hash = "sha256:34967d8813ca77bc4d53217aff5e56e73cd4bec433886ae652fad1365440f04b", size = 14349, upload-time = "2026-06-22T13:26:59.174Z" },
+    { url = "https://files.pythonhosted.org/packages/54/f8/c13c0ce691cc03cfdc9118b293faa9557c66174dcff8ac55b5131adc21ec/apis_data_projection-0.1.3-py3-none-any.whl", hash = "sha256:9bf401802320a4d774bf3ad858615a874933b0c8ed5a1e9a1d0de810e55f9ede", size = 14358, upload-time = "2026-06-22T14:58:25.684Z" },
 ]
 
 [[package]]
