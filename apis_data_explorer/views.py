@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from datetime import date
 
 from django.db.models import Case, Count, IntegerField, Q, Value, When
 from django.views.generic import ListView, TemplateView
@@ -30,17 +31,44 @@ class EntitySearchView(ListView):
     def get_query(self):
         return (self.request.GET.get("q") or "").strip()
 
+    def get_date_from(self):
+        return (self.request.GET.get("date_from") or "").strip()
+
+    def get_date_to(self):
+        return (self.request.GET.get("date_to") or "").strip()
+
     def get_base_queryset(self):
         return EntityProjection.objects.all()
 
+    def apply_date_filters(self, qs):
+        date_from = self.get_date_from()
+        date_to = self.get_date_to()
+
+        if date_from or date_to:
+            qs = qs.exclude(start_date__isnull=True, end_date__isnull=True)
+
+        if date_from and date_to:
+            qs = qs.filter(
+                Q(start_date__isnull=True) | Q(start_date__lte=date_to),
+                Q(end_date__isnull=True) | Q(end_date__gte=date_from),
+            )
+        elif date_from:
+            qs = qs.filter(
+                Q(end_date__isnull=True) | Q(end_date__gte=date_from)
+            )
+        elif date_to:
+            qs = qs.filter(
+                Q(start_date__isnull=True) | Q(start_date__lte=date_to)
+            )
+
+        return qs
     def get_search_queryset(self):
         qs = self.get_base_queryset()
         q = self.get_query()
 
         if not q:
-            return qs.none()
-
-        return (
+            return self.apply_date_filters(qs.order_by("label", "id"))
+        qs = (
             qs.filter(
                 Q(label__icontains=q)
                 | Q(search_text__icontains=q)
@@ -60,6 +88,8 @@ class EntitySearchView(ListView):
             )
             .order_by("-relevance", "label", "id")
         )
+
+        return self.apply_date_filters(qs)
 
     def get_selected_facets(self):
         selected = {}
@@ -196,6 +226,8 @@ class EntitySearchView(ListView):
         context.update(
             {
                 "query": self.get_query(),
+                "date_from": self.get_date_from(),
+                "date_to": self.get_date_to(),
                 "selected_facets": self.get_selected_facets(),
                 "facets": self.get_facets_for_panel(),
             }

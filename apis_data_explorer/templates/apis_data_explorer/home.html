@@ -4,21 +4,74 @@
 {% block main_class %}{% endblock %}
 
 {% block content %}
-<div class="explorer-layout">
-    <aside class="facets">
-        <form method="get" action="{% url 'search' %}">
+<form method="get" action="{% url 'search' %}">
+    <div class="explorer-layout">
+        <aside class="facets">
             <h4>Filters</h4>
 
-            {% if query %}
-                {% for kind_group in facets %}
-                    <fieldset class="facet-kind-group">
-                        {% for facet in kind_group.facets %}
-                            {% if facet.is_expanded %}
-                                <div class="facet-group">
-                                    <div class="facet-title">{{ facet.label }}</div>
+            <div class="search-panel">
+                <label for="id_q">Search</label>
+                <input
+                    type="search"
+                    id="id_q"
+                    name="q"
+                    value="{{ query }}"
+                    placeholder="Search entities …"
+                    aria-label="Search data"
+                >
+            </div>
+
+            <div class="date-filters">
+                <div>
+                    <label for="id_date_from">From</label>
+                    <input
+                        type="date"
+                        id="id_date_from"
+                        name="date_from"
+                        value="{{ date_from }}"
+                    >
+                </div>
+
+                <div>
+                    <label for="id_date_to">To</label>
+                    <input
+                        type="date"
+                        id="id_date_to"
+                        name="date_to"
+                        value="{{ date_to }}"
+                    >
+                </div>
+            </div>
+
+            {% for kind_group in facets %}
+                <fieldset class="facet-kind-group">
+                    {% for facet in kind_group.facets %}
+                        <details
+                            class="facet-group{% if not facet.is_expanded %} facet-group-collapsed{% endif %}"
+                            {% if facet.is_expanded or facet.is_selected %}open{% endif %}
+                        >
+                            <summary class="facet-title">{{ facet.label }}</summary>
+
+                            <div class="facet-options">
+                                {% for option in facet.visible_options %}
+                                    <label class="facet-option">
+                                        <input
+                                            type="checkbox"
+                                            name="{{ facet.param }}"
+                                            value="{{ option.value }}"
+                                            {% if option.selected %}checked{% endif %}
+                                        >
+                                        <span>{{ option.value }} ({{ option.count }})</span>
+                                    </label>
+                                {% endfor %}
+                            </div>
+
+                            {% if facet.has_more %}
+                                <details class="facet-more" {% if facet.is_selected %}open{% endif %}>
+                                    <summary>Show {{ facet.hidden_options|length }} more</summary>
 
                                     <div class="facet-options">
-                                        {% for option in facet.visible_options %}
+                                        {% for option in facet.hidden_options %}
                                             <label class="facet-option">
                                                 <input
                                                     type="checkbox"
@@ -30,103 +83,30 @@
                                             </label>
                                         {% endfor %}
                                     </div>
-
-                                    {% if facet.has_more %}
-                                        <details class="facet-more" {% if facet.is_selected %}open{% endif %}>
-                                            <summary>Show {{ facet.hidden_options|length }} more</summary>
-
-                                            <div class="facet-options">
-                                                {% for option in facet.hidden_options %}
-                                                    <label class="facet-option">
-                                                        <input
-                                                            type="checkbox"
-                                                            name="{{ facet.param }}"
-                                                            value="{{ option.value }}"
-                                                            {% if option.selected %}checked{% endif %}
-                                                        >
-                                                        <span>{{ option.value }} ({{ option.count }})</span>
-                                                    </label>
-                                                {% endfor %}
-                                            </div>
-                                        </details>
-                                    {% endif %}
-                                </div>
-                            {% else %}
-                                <details class="facet-group facet-group-collapsed" {% if facet.is_selected %}open{% endif %}>
-                                    <summary class="facet-title">{{ facet.label }}</summary>
-
-                                    <div class="facet-options">
-                                        {% for option in facet.visible_options %}
-                                            <label class="facet-option">
-                                                <input
-                                                    type="checkbox"
-                                                    name="{{ facet.param }}"
-                                                    value="{{ option.value }}"
-                                                    {% if option.selected %}checked{% endif %}
-                                                >
-                                                <span>{{ option.value }} ({{ option.count }})</span>
-                                            </label>
-                                        {% endfor %}
-                                    </div>
-
-                                    {% if facet.has_more %}
-                                        <details class="facet-more" {% if facet.is_selected %}open{% endif %}>
-                                            <summary>Show {{ facet.hidden_options|length }} more</summary>
-
-                                            <div class="facet-options">
-                                                {% for option in facet.hidden_options %}
-                                                    <label class="facet-option">
-                                                        <input
-                                                            type="checkbox"
-                                                            name="{{ facet.param }}"
-                                                            value="{{ option.value }}"
-                                                            {% if option.selected %}checked{% endif %}
-                                                        >
-                                                        <span>{{ option.value }} ({{ option.count }})</span>
-                                                    </label>
-                                                {% endfor %}
-                                            </div>
-                                        </details>
-                                    {% endif %}
                                 </details>
                             {% endif %}
-                        {% endfor %}
-                    </fieldset>
-                {% empty %}
-                    <p>No filters available for this query.</p>
-                {% endfor %}
-            {% else %}
-                <p>Enter a search term to see filters.</p>
-            {% endif %}
+                        </details>
+                    {% endfor %}
+                </fieldset>
+            {% empty %}
+                <p>No filters available.</p>
+            {% endfor %}
 
-            <input type="hidden" name="q" value="{{ query }}">
-            <button type="submit">Apply</button>
-        </form>
-    </aside>
+            <div class="filter-actions">
+                <button type="submit">Apply</button>
+                <a href="{% url 'search' %}">Clear all</a>
+            </div>
+        </aside>
 
-    <main class="results">
-        <section class="search-panel">
-            <article>
-                <form method="get" action="{% url 'search' %}" role="search">
-                    <input
-                        type="search"
-                        name="q"
-                        value="{{ query }}"
-                        placeholder="Search entities …"
-                        aria-label="Search data"
-                    >
-                    <button type="submit">Search</button>
-                </form>
-            </article>
-        </section>
-
-        {% if query %}
-            <section>
+        <main class="results">
+            <section class="results-meta">
                 <p>
                     {{ page_obj.paginator.count }} result{{ page_obj.paginator.count|pluralize }}
-                    for “{{ query }}”
+                    {% if query %}for “{{ query }}”{% endif %}
                 </p>
+            </section>
 
+            <section class="results-list">
                 {% for result in results %}
                     {% include "partials/search_result_card.html" with result=result only %}
                 {% empty %}
@@ -151,11 +131,7 @@
                     {% endif %}
                 </nav>
             {% endif %}
-        {% else %}
-            <section>
-                <p>Enter a term to search labels and indexed text.</p>
-            </section>
-        {% endif %}
-    </main>
-</div>
+        </main>
+    </div>
+</form>
 {% endblock %}
