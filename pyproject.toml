@@ -1,6 +1,6 @@
 [project]
 name = "apis-data-explorer"
-version = "0.0.7"
+version = "0.0.8"
 description = "A generic, customisable data explorer for APIS instances"
 readme = "README.md"
 requires-python = ">=3.13"
