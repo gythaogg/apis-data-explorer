@@ -1,14 +1,14 @@
 <article class="search-result">
-    <h3>
+    <hgroup>
+    <h6>
         {% if result.uri %}
             <a href="{{ result.uri }}">{{ result.label }}</a>
         {% else %}
             {{ result.label }}
         {% endif %}
-    </h3>
-
-    <p>{{ result.entity_type }}</p>
-
+    </h6>
+    <small>{{ result.entity_type }}</small>
+    </hgroup> 
     {% if result.search_text %}
         <p>{{ result.search_text|truncatechars:220 }}</p>
     {% endif %}

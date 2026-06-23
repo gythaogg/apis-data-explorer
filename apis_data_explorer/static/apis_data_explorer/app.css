@@ -1,3 +1,12 @@
+:root {
+  --pico-border-radius: 1rem;
+  --pico-typography-spacing-vertical: 1rem;
+  --pico-form-element-spacing-vertical: 1rem;
+  --pico-form-element-spacing-horizontal: 1rem;
+  --pico-font-size: 1rem;
+  --pico-font-family: "Inter", sans-serif;
+}
+
 html,
 body {
   min-height: 100%;
@@ -24,28 +33,112 @@ body.layout-shell > footer {
 .footer-content {
   text-align: center;
 }
+
 .explorer-layout {
   display: grid;
-  grid-template-columns: minmax(180px, 20%) 1fr;
+  grid-template-columns: minmax(180px, 20%) minmax(0, 1fr);
   gap: 1rem;
   align-items: start;
 }
 
 .facets {
-  margin: 0 0 0 0.5rem;
+  margin-left: 0.5rem;
 }
 
 .results {
-  min-width: 0; /* prevents overflow in grid layouts */
-  margin: 0 0.5rem 0 0;
+  min-width: 0;
+  margin-right: 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+.results,
+.results > * {
+  min-width: 0;
+}
+
+.results input,
+.results select,
+.results textarea,
+.results button {
+  max-width: 100%;
+}
+
+.search-panel form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.search-panel input[type="search"] {
+  width: 100%;
+  min-width: 0;
+}
+
+.search-panel button,
+.search-panel [type="submit"] {
+  white-space: nowrap;
+}
+
+.facet-kind-group {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem 1rem;
+  border: 1px solid var(--muted-border-color, #ddd);
+}
+
+.facet-group + .facet-group {
+  margin-top: 0.75rem;
+}
+
+.facet-title {
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.facet-options {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.facet-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.facet-more {
+  margin-top: 0.5rem;
+}
+
+.facet-more summary {
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.facet-more .facet-options {
+  margin-top: 0.5rem;
+}
+
+h1 {
+  --pico-font-family: Pacifico, cursive;
+  --pico-font-weight: 400;
+  --pico-typography-spacing-vertical: 0.5rem;
+}
+
+button {
+  --pico-font-weight: 700;
 }
 
 @media (max-width: 768px) {
-  .layout {
+  .explorer-layout {
     grid-template-columns: 1fr;
   }
 
-  .facets {
-    max-width: none;
+  .facets,
+  .results {
+    margin: 0;
+  }
+
+  .search-panel form {
+    grid-template-columns: 1fr;
   }
 }

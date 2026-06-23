@@ -1,25 +1,103 @@
 {% extends "apis_data_explorer/base.html" %}
 {% load search_tags %}
+
 {% block main_class %}{% endblock %}
 
 {% block content %}
-{% entity_types as entity_types %}
 <div class="explorer-layout">
     <aside class="facets">
         <form method="get" action="{% url 'search' %}">
             <h4>Filters</h4>
 
-            <div>
-                <label for="id_entity_type">Entity type</label>
-                <select id="id_entity_type" name="entity_type">
-                    <option value="">All types</option>
-                    {% for entity_type in entity_types %}
-                        <option value="{{ entity_type }}" {% if entity_type == selected_entity_type %}selected{% endif %}>
-                            {{ entity_type }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
+            {% if query %}
+                {% for kind_group in facets %}
+                    <fieldset class="facet-kind-group">
+                        {% for facet in kind_group.facets %}
+                            {% if facet.is_expanded %}
+                                <div class="facet-group">
+                                    <div class="facet-title">{{ facet.label }}</div>
+
+                                    <div class="facet-options">
+                                        {% for option in facet.visible_options %}
+                                            <label class="facet-option">
+                                                <input
+                                                    type="checkbox"
+                                                    name="{{ facet.param }}"
+                                                    value="{{ option.value }}"
+                                                    {% if option.selected %}checked{% endif %}
+                                                >
+                                                <span>{{ option.value }} ({{ option.count }})</span>
+                                            </label>
+                                        {% endfor %}
+                                    </div>
+
+                                    {% if facet.has_more %}
+                                        <details class="facet-more" {% if facet.is_selected %}open{% endif %}>
+                                            <summary>Show {{ facet.hidden_options|length }} more</summary>
+
+                                            <div class="facet-options">
+                                                {% for option in facet.hidden_options %}
+                                                    <label class="facet-option">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="{{ facet.param }}"
+                                                            value="{{ option.value }}"
+                                                            {% if option.selected %}checked{% endif %}
+                                                        >
+                                                        <span>{{ option.value }} ({{ option.count }})</span>
+                                                    </label>
+                                                {% endfor %}
+                                            </div>
+                                        </details>
+                                    {% endif %}
+                                </div>
+                            {% else %}
+                                <details class="facet-group facet-group-collapsed" {% if facet.is_selected %}open{% endif %}>
+                                    <summary class="facet-title">{{ facet.label }}</summary>
+
+                                    <div class="facet-options">
+                                        {% for option in facet.visible_options %}
+                                            <label class="facet-option">
+                                                <input
+                                                    type="checkbox"
+                                                    name="{{ facet.param }}"
+                                                    value="{{ option.value }}"
+                                                    {% if option.selected %}checked{% endif %}
+                                                >
+                                                <span>{{ option.value }} ({{ option.count }})</span>
+                                            </label>
+                                        {% endfor %}
+                                    </div>
+
+                                    {% if facet.has_more %}
+                                        <details class="facet-more" {% if facet.is_selected %}open{% endif %}>
+                                            <summary>Show {{ facet.hidden_options|length }} more</summary>
+
+                                            <div class="facet-options">
+                                                {% for option in facet.hidden_options %}
+                                                    <label class="facet-option">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="{{ facet.param }}"
+                                                            value="{{ option.value }}"
+                                                            {% if option.selected %}checked{% endif %}
+                                                        >
+                                                        <span>{{ option.value }} ({{ option.count }})</span>
+                                                    </label>
+                                                {% endfor %}
+                                            </div>
+                                        </details>
+                                    {% endif %}
+                                </details>
+                            {% endif %}
+                        {% endfor %}
+                    </fieldset>
+                {% empty %}
+                    <p>No filters available for this query.</p>
+                {% endfor %}
+            {% else %}
+                <p>Enter a search term to see filters.</p>
+            {% endif %}
 
             <input type="hidden" name="q" value="{{ query }}">
             <button type="submit">Apply</button>
@@ -34,14 +112,9 @@
                         type="search"
                         name="q"
                         value="{{ query }}"
-                        placeholder="Search {{ entity_type_placeholder | join:", " }} …"
+                        placeholder="Search entities …"
                         aria-label="Search data"
                     >
-
-                    {% if selected_entity_type %}
-                        <input type="hidden" name="entity_type" value="{{ selected_entity_type }}">
-                    {% endif %}
-
                     <button type="submit">Search</button>
                 </form>
             </article>
@@ -52,7 +125,6 @@
                 <p>
                     {{ page_obj.paginator.count }} result{{ page_obj.paginator.count|pluralize }}
                     for “{{ query }}”
-                    {% if selected_entity_type %} in {{ selected_entity_type }}{% endif %}
                 </p>
 
                 {% for result in results %}
@@ -65,7 +137,7 @@
             {% if page_obj.paginator.num_pages > 1 %}
                 <nav aria-label="Pagination">
                     {% if page_obj.has_previous %}
-                        <a href="?q={{ query|urlencode }}{% if selected_entity_type %}&entity_type={{ selected_entity_type|urlencode }}{% endif %}&page={{ page_obj.previous_page_number }}">
+                        <a href="{% querystring page=page_obj.previous_page_number %}">
                             Previous
                         </a>
                     {% endif %}
@@ -73,7 +145,7 @@
                     <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
 
                     {% if page_obj.has_next %}
-                        <a href="?q={{ query|urlencode }}{% if selected_entity_type %}&entity_type={{ selected_entity_type|urlencode }}{% endif %}&page={{ page_obj.next_page_number }}">
+                        <a href="{% querystring page=page_obj.next_page_number %}">
                             Next
                         </a>
                     {% endif %}
