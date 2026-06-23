@@ -4,13 +4,12 @@
 {% block main_class %}{% endblock %}
 
 {% block content %}
-<form method="get" action="{% url 'search' %}">
+<form method="get" action="{% url 'explore' %}">
     <div class="explorer-layout">
         <aside class="facets">
             <h4>Filters</h4>
 
             <div class="search-panel">
-                <label for="id_q">Search</label>
                 <input
                     type="search"
                     id="id_q"
@@ -94,16 +93,18 @@
 
             <div class="filter-actions">
                 <button type="submit">Apply</button>
-                <a href="{% url 'search' %}">Clear all</a>
+                <a href="{% url 'explore' %}">Clear all</a>
             </div>
         </aside>
 
         <main class="results">
             <section class="results-meta">
+                {% if page_obj %}
                 <p>
                     {{ page_obj.paginator.count }} result{{ page_obj.paginator.count|pluralize }}
                     {% if query %}for “{{ query }}”{% endif %}
                 </p>
+            {% endif %}
             </section>
 
             <section class="results-list">
