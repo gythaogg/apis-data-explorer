@@ -77,7 +77,7 @@ wheels = [
 
 [[package]]
 name = "apis-core-rdf"
-version = "0.64.5"
+version = "0.65.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "acdh-arche-assets" },
@@ -97,9 +97,9 @@ dependencies = [
     { name = "rdflib" },
     { name = "tablib" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ac/50/522ba3e766ede5029355d8abeefc72890c84bd809ee899b10ad995e835ab/apis_core_rdf-0.64.5.tar.gz", hash = "sha256:0e6d6ce9ad870814bb6f1b4f0e08175555d9ac414a02000f547aa4e60b9f4b89", size = 324377, upload-time = "2026-06-15T07:32:43.756Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/49/3b/d87f8f93249c6baf076019b1d7c534a67abf3fa6ec02c5d36cdb14e56f8f/apis_core_rdf-0.65.1.tar.gz", hash = "sha256:d8d783b5981b8ab8821c1e49bcc7fc536a7ff65b8bc14fce1cae47b8d2ef1851", size = 325693, upload-time = "2026-06-23T12:57:04.485Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ea/0b/403c262b9d318d2ebfd24f2517e631189ca1fd9e2265ad4cf0b8d8e07e0d/apis_core_rdf-0.64.5-py3-none-any.whl", hash = "sha256:402b44b920d2326b9fcccf204b11a6f86f7def8e7420ac94bc25a22324163d09", size = 296245, upload-time = "2026-06-15T07:32:42.415Z" },
+    { url = "https://files.pythonhosted.org/packages/ff/43/634b34c33786b68ededa3ffdbca76c1f5ee2f3892e1b2d74d6ac26c6327f/apis_core_rdf-0.65.1-py3-none-any.whl", hash = "sha256:aedbab608c8cef80f1f2ecc291a747d9835e3903f5b048657b816b1c1e5932e0", size = 297352, upload-time = "2026-06-23T12:57:02.897Z" },
 ]
 
 [[package]]
@@ -120,24 +120,24 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "apis-acdhch-default-settings", specifier = "==2.20.0" },
-    { name = "apis-core-rdf", specifier = "==0.64.5" },
-    { name = "apis-data-projection", specifier = ">=0.1.4" },
+    { name = "apis-core-rdf", specifier = "==0.65.1" },
+    { name = "apis-data-projection", specifier = ">=0.1.5" },
     { name = "faker", marker = "extra == 'dev'", specifier = ">=40.23.0" },
 ]
 provides-extras = ["dev"]
 
 [[package]]
 name = "apis-data-projection"
-version = "0.1.4"
+version = "0.1.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "apis-acdhch-default-settings" },
     { name = "apis-core-rdf" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d0/53/6fbcd10837bacc65826c5ab11459078b627034e8fc9180b87813c18583f7/apis_data_projection-0.1.4.tar.gz", hash = "sha256:627177dca458d65e877baa225fa9015614596720d39bb4829daf0d1cf63ade68", size = 56199, upload-time = "2026-06-22T15:11:41.602Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/97/50/b376055bc356e302e463395b5c920fe17204a26b3b929a952efec91e6f77/apis_data_projection-0.1.5.tar.gz", hash = "sha256:9bc67cc4409d4a7ee93b66db2d443a8e683ec8829a2bfbed8fbd6ae0b46882ef", size = 56267, upload-time = "2026-07-01T09:23:33.172Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ab/4a/8c8729662483fe5dd3b1555ac4b3774b894cbbdcd4d98a8a1db2b45a02b2/apis_data_projection-0.1.4-py3-none-any.whl", hash = "sha256:d10eb9ddda401a8baa406b47633917a0bc66bd6b923c91b3a522ed90bed55045", size = 14354, upload-time = "2026-06-22T15:11:40.256Z" },
+    { url = "https://files.pythonhosted.org/packages/8c/d3/f91fea5d8d01ae7acd0a481803c2dd94e6adf1cf9218db5f0a27f580e1e9/apis_data_projection-0.1.5-py3-none-any.whl", hash = "sha256:b30f705bb0a39374ba0769b378acbec350b6e4d4d9420ca62afad2a8c6ee9bc2", size = 14396, upload-time = "2026-07-01T09:23:31.899Z" },
 ]
 
 [[package]]

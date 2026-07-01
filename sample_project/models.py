@@ -1,6 +1,6 @@
 from django.db import models
 
-from apis_core.apis_entities.abc import E21_Person, E53_Place, E74_Group
+from apis_core.entities.abc import E21_Person, E53_Place, E74_Group
 from apis_core.apis_entities.models import AbstractEntity
 from apis_core.entities.abc import Entity
 from apis_core.generic.abc import GenericModel
@@ -36,6 +36,7 @@ class Place(E53_Place, AbstractEntity, Entity):
 class Group(E74_Group, AbstractEntity, Entity):
     pass
 
+
 class RelationMixin(Relation):
     certainty = models.CharField(
         max_length=10,
@@ -46,10 +47,12 @@ class RelationMixin(Relation):
         ],
         default="certain",
     )
+
     class Meta:
         abstract = True
         ordering = ["pk"]
-        
+
+
 class IsCousinOf(RelationMixin):
     subj_model = Person
     obj_model = Person
